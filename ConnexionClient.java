@@ -17,7 +17,7 @@ public class ConnexionClient {
             int connected = c.getConnected();
             System.out.println("Number of connected clients: " + connected);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error while connecting to server"+e);
         }
     }
 }
