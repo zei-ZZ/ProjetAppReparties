@@ -7,8 +7,8 @@ public class ClientInterface extends JFrame implements ActionListener {
     private JTextField nameField;
     private JButton addButton;
 
-    public ClientInterface(Connexion connexion) {
-        this.connexion = connexion;
+    public ClientInterface(ConnexionInterface c) {
+        this.connexion = (Connexion) c;
         setTitle("Ajouter un client");
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

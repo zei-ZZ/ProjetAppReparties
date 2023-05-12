@@ -1,29 +1,10 @@
 import java.rmi.Naming;
+import javax.swing.*;
 
 public class ConnexionClient {
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Usage: java ConnexionClient <name>");
-            return;
-        }
+        String name = JOptionPane.showInputDialog(null, "Entrez votre nom :");
 
-        String name = args[0];
-/* if you want to use the GUI 
- * try {
-    ConnexionInterface c = (ConnexionInterface) Naming.lookup("rmi://localhost/ConnexionService");
-    String message = "Adding " + name + " to connected clients...\n";
-    message += c.addConnected(name) + "\n";
-    int connected = c.getConnected();
-    message += "Number of connected clients: " + connected;
-    JOptionPane.showMessageDialog(null, message);
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(null, "Error while connecting to server: " + e.getMessage());
-}
-
- */
-
-
-        
         try {
             ConnexionInterface c = (ConnexionInterface) Naming.lookup("rmi://localhost/ConnexionService");
             System.out.println("Adding " + name + " to connected clients...");
@@ -31,6 +12,11 @@ public class ConnexionClient {
 
             int connected = c.getConnected();
             System.out.println("Number of connected clients: " + connected);
+
+            // Create instance of ClientInterface and show it
+            ClientInterface clientInterface = new ClientInterface(c);
+            clientInterface.setVisible(true);
+
         } catch (Exception e) {
             System.err.println("Error while connecting to server"+e);
         }
