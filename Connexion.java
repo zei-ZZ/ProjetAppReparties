@@ -12,7 +12,7 @@ public class Connexion extends java.rmi.server.UnicastRemoteObject implements Co
 
     @Override
     public int getConnected() throws RemoteException {
-        return Nom.size();
+        return cpt;
     }
 
     @Override
@@ -20,15 +20,16 @@ public class Connexion extends java.rmi.server.UnicastRemoteObject implements Co
         cpt++;
         Nom.add(name);
         System.out.println("client added successfully!!!!!!!");
-        return "Success";
+        return Nom.toString();
     }
 
     @Override
     public String removeConnected(String name) throws RemoteException {
         if (Nom.contains(name)) {
             Nom.remove(name);
+            cpt--;
             System.out.println("client removed successfully!!!!!!!");
-            return "Success";
+            return Nom.toString();
         } else {
             System.out.println("client not found!!!!!!!");
             return "Error";

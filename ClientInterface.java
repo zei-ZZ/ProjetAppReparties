@@ -8,6 +8,7 @@ public class ClientInterface extends JFrame implements ActionListener {
     private JButton addButton;
     private JButton disconnectButton;
     private boolean isConnected;
+    String client;
 
     public ClientInterface(ConnexionInterface c) {
         this.connexion =  c;
@@ -18,11 +19,14 @@ public class ClientInterface extends JFrame implements ActionListener {
         addButton = new JButton("Ajouter");
         addButton.addActionListener(this);
         disconnectButton = new JButton("Disconnect");
+        disconnectButton.setEnabled(false);
         disconnectButton.addActionListener(this);
         setLayout(new GridLayout(3, 2));
         add(new JLabel("Nom :"));
+
         add(nameField);
         add(addButton);
+        add(disconnectButton);
         isConnected = false;
     }
 
@@ -35,15 +39,16 @@ public class ClientInterface extends JFrame implements ActionListener {
             if (e.getSource() == addButton) {
                 // Add the client
                 clients = connexion.addConnected(name);
+                client=name;
                 isConnected = true;
                 addButton.setEnabled(false);
-                add(disconnectButton);
+                disconnectButton.setEnabled(true);
             } else if (e.getSource() == disconnectButton) {
                 // Remove the client
-                connexion.removeConnected(name);
+                clients=connexion.removeConnected(client);
                 isConnected = false;
                 addButton.setEnabled(true);
-                remove(disconnectButton);
+                disconnectButton.setEnabled(false);
             }
 
             int nbre = connexion.getConnected(); 
