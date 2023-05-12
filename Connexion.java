@@ -10,7 +10,6 @@ public class Connexion extends java.rmi.server.UnicastRemoteObject  implements C
     }
     @Override
     public int getConnected() throws RemoteException {
-        // TODO Auto-generated method stub
         return Nom.size() ;
     }
     @Override

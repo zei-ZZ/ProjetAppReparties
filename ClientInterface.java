@@ -3,22 +3,18 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ClientInterface extends JFrame implements ActionListener {
-    private Connexion connexion;
+    private ConnexionInterface connexion;
     private JTextField nameField;
     private JButton addButton;
 
     public ClientInterface(ConnexionInterface c) {
-        this.connexion = (Connexion) c;
+        this.connexion =  c;
         setTitle("Ajouter un client");
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        // Créer les champs de texte et le bouton
         nameField = new JTextField(20);
         addButton = new JButton("Ajouter");
         addButton.addActionListener(this);
-
-        // Utiliser le gestionnaire de mise en page GridLayout
         setLayout(new GridLayout(3, 2));
         add(new JLabel("Nom :"));
         add(nameField);
@@ -32,18 +28,18 @@ public class ClientInterface extends JFrame implements ActionListener {
             if (e.getSource() == addButton) {
                 // Récupérer les valeurs des champs de texte
                 String name = nameField.getText();
-                
-        
-                // Ajouter le client à la liste
+                int nbre;
                 try {
-                    clients = connexion.addConnected(name); // Assign value to clients variable
+                    clients = connexion.addConnected(name);
+                    nbre=connexion.getConnected(); 
+                    this.nameField.setText("");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout du client.");
                     return;
                 }
                 
-                JOptionPane.showMessageDialog(this, "Client ajouté.");
-                JOptionPane.showMessageDialog(this, "Liste des clients : " + clients);
+                JOptionPane.showMessageDialog(this, "Client ajoute.");
+                JOptionPane.showMessageDialog(this, "Liste des clients : " + clients +"\n nbre de clients: "+nbre);
             }
         }
         
